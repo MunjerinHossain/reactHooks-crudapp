@@ -1,10 +1,6 @@
 import React, { useState, useEffect, props } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { Link, Redirect } from 'react-router-dom';
 import List from '@material-ui/core/List';
@@ -125,7 +121,7 @@ export default function AllPost({ props }) {
                             <br />
                         </Paper>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={8}>
+                    <Grid item xs={12} sm={12} md={9}>
                         <Paper className={classes.paper}>
                             <Typography variant="h6" component="h2">All Posts:</Typography>
                             <Divider />
