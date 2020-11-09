@@ -18,7 +18,10 @@ import Category from './Category'
 import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import DialogContentText from '@material-ui/core/DialogContentText';
-
+import IconButton from '@material-ui/core/IconButton';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,14 +40,21 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(3),
     },
+    Button: {
+        display: "inline",
+        marginLeft: '800px',
+    }
 }));
 
-const AddNewPost = ({ callBack }) => {
+const EditPost = ({ callBack, i }) => {
+    const classes = useStyles();
+
     const [title, setTitle] = useState('');
     const [categories, setCategories] = useState([]);
     const [allCategories, setAllCategories] = useState([]);
 
     const [open, setOpen] = React.useState(false);
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -62,28 +72,49 @@ const AddNewPost = ({ callBack }) => {
         console.log('load category', value);
         setAllCategories(value)
 
+        let readData = localStorage.getItem('posts')
+        console.log('read post', readData);
+        const data = JSON.parse(readData) || [];
+        console.log('load post', data);
+        setTitle(data[i].title)
+        setCategories(data[i].categories)
+
     }, [])
 
     const handleSubmit = () => {
 
-        let readCategory = localStorage.getItem('posts')
-        console.log('read posts', readCategory);
-        let value = JSON.parse(readCategory) || [];
+        let readPost = localStorage.getItem('posts')
+        console.log('read posts', readPost);
+        let value = JSON.parse(readPost) || [];
         console.log('load posts', value);
-        value.push({ 'title': title, 'categories': categories });
+        console.log(i, 'i');
+
+        value[i].title = title;
+        value[i].categories = categories;
+
+
         localStorage.setItem('posts', JSON.stringify(value))
-        console.log('save posts', value);
+        console.log(value, 'editposts');
+
         setOpen(false)
         callBack(value)
-        // setAllCategories(value)
     }
+
+
 
     return (
         <div>
-            <Button onClick={handleClickOpen} variant="contained">Create New post</Button>
+            <List>
+                <ListItem className={classes.Button}>
+                    <IconButton edge="end" aria-label="delete">
+                        <EditIcon onClick={handleClickOpen} />
+                    </IconButton>
+                </ListItem>
+            </List>
+
 
             <Dialog open={open} onClose={handleClose} style={{ width: 500 }}>
-                <DialogTitle>Add new post:</DialogTitle>
+                <DialogTitle>Edit post:</DialogTitle>
                 <DialogContent>
                     <>
                         <div>
@@ -134,7 +165,9 @@ const AddNewPost = ({ callBack }) => {
                                 />
                             </div>
                             <br />
+
                         </div>
+
                     </>
 
                 </DialogContent>
@@ -143,11 +176,12 @@ const AddNewPost = ({ callBack }) => {
                     <Button onClick={handleClose} color="primary">Close</Button>
                     <Button onClick={handleSubmit} color="primary">Save</Button>
                 </DialogActions>
-
+                
             </Dialog>
+
         </div>
 
     );
 };
 
-export default AddNewPost;
+export default EditPost;

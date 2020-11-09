@@ -11,19 +11,21 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import PostForm from './PostForm.js'
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Category from './Category'
-import Chip from '@material-ui/core/Chip';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-
-
-function storage() {
-
-    console.log('storage');
-}
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import EditPost from './EditPost'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Divider from '@material-ui/core/Divider'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,68 +43,30 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(3),
     },
+    root1: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+        alignContent: 'center',
+        left: '300px'
+    },
+    table: {
+        minWidth: 650,
+    },
 }));
 
-export default function FormPropsTextFields({ props }) {
+export default function AllPost({ props }) {
     const classes = useStyles();
 
     const [posts, setPosts] = useState([])
-    const [categories, setCategories] = useState([
-        {   // currentName: "",
-            name: '',
-            // currentParent: [],
-            parent: '',
-        }
-    ])
-    const [data, setData] = React.useState('');
 
-    const [open, setOpen] = React.useState(false);
-    const [show, setShow] = React.useState(false);
-
-    const [values, setValues] = useState([
-        {   // currentName: "",
-            title: '',
-            // currentParent: [],
-            content: '',
-        }
-    ])
-
-
-    // useEffect(() => {
-    //     // localStorage.clear();
-    //     // console.log('data', category);
-
-    //     try {
-
-    //         // const valueString = localStorage.setItem('posts', JSON.stringify(posts));
-
-
-    //         // // const readData = value.
-    //         // // console.log('value', value);
-    //         // // setCategory(value);
-    //         // console.log('save data: ', valueString);
-    //         // setPosts(valueString)
-    //         // // else {
-    //         // //     console.log('no data found');
-    //         // }
-
-    //         handleSubmit();
-
-    //         console.log('save');
-
-    //     } catch (error) {
-    //         console.log(error, 'error');
-    //     }
-
-    // }, []);
-
+    const [editPostModal, setEditPostModal] = React.useState([]);
 
     useEffect(() => {
-        // localStorage.clear();
-        // console.log('data', category);
-
         try {
-
             console.log('save');
             getData()
 
@@ -112,125 +76,106 @@ export default function FormPropsTextFields({ props }) {
 
     }, []);
 
-    const handleChange = (item, i) => e => {
-        // console.log('e', e.target.value);
-        let update = [{ ...posts }]
-
-        update[i] = e.target.value
-        console.log('check', update)
-        setPosts(update)
-        // console.log('data', posts);
-        // setPosts({ ...posts, [e.target.item]: e.target.value });
-    };
-
-    const handleSubmit = (item, i) => e => {
-        // let updateParent = [...category.currentParent]
-
-        // updateParent.push(event.target.value)
-
-
-        // setParent({ updateParent, parent: '' })
-        let saveData = localStorage.setItem('posts', JSON.stringify(posts))
-        console.log(posts, 'posts');
-        setPosts(saveData)
-    }
-
     const getData = () => {
-        // let updateParent = [...category.currentParent]
 
-        // updateParent.push(event.target.value)
-
-
-        // setParent({ updateParent, parent: '' })
         let readData = localStorage.getItem('posts')
         console.log('read post', readData);
         const data = JSON.parse(readData) || [];
         console.log('load post', data);
         setPosts(data)
 
-        // let readCategory = localStorage.getItem('categories')
-        // console.log('read category', readCategory);
-        // const value = JSON.parse(readCategory) || [];
-        // console.log('load category', value);
-        // setCategories(value)
+        setEditPostModal(new Array(data.length).fill(false))
     }
 
-    // const retrieveData = () => {
 
-    // };
+    const handleDelete = (i) => {
+        console.log(i, 'i');
+        var data = posts;
+        console.log('data l', data.length);
+        data.splice(i, 1)
+        console.log('data l', data.length);
+        console.log('delete post', data);
 
-    const handleModel = () => { setShow(false); };
+        localStorage.setItem('posts', JSON.stringify(posts))
+        console.log(posts, 'deleteposts');
+        setPosts([...posts])
+        console.log('state post', posts);
+    }
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-
-    const handleOpen = () => {
-        storage();
-        setOpen(true);
-    };
-
-
+    const handleEditPost = (p) => {
+        console.log(p, 'p');
+        setPosts([...p])
+        console.log('edit post', p);
+    }
 
 
     return (
         <>
-            <br />
-            {/* <Button variant="contained" onClick={handleClickOpen} >
-                Add new post
-                 <PostForm/>
-            </Button> */}
+            <div className={classes.root}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <Paper className={classes.paper}>
+                            <br />
+                            <PostForm
+                                callBack={cb => {
+                                    console.log('user name', cb)
+                                    setPosts(cb)
+                                }}
+                            />
+                            <br />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={8}>
+                        <Paper className={classes.paper}>
+                            <Typography variant="h6" component="h2">All Posts:</Typography>
+                            <Divider />
+                            <TableContainer component={Paper}>
+                                <Table className={classes.table} aria-label="simple table">
+                                    {!posts.length == 0 ?
+                                        <TableBody>
+                                            <TableRow>
+                                                {posts.map((item, i) => {
+                                                    return (
+                                                        <span key={i} >
+                                                            <ListItem >
+                                                                <ListItemText variant="h3">
+                                                                    {i + 1}{") "}{"Title: "}{item.title}{"  "}{" "}
+                                                                    <br />
+                                                                    {i + 1}{") "} {"Category:"} {item.categories}
+                                                                    <EditPost
+                                                                        callBack={handleEditPost}
+                                                                        i={i}
+                                                                    />
+                                                                    <br />
+                                                                    <br />
+                                                                    <ListItemSecondaryAction>
+                                                                        <IconButton edge="end" aria-label="delete">
+                                                                            <DeleteIcon onClick={() => { handleDelete(i) }} />
+                                                                        </IconButton>
+                                                                    </ListItemSecondaryAction>
+                                                                </ListItemText>
+                                                            </ListItem>
+                                                            <Divider />
+                                                        </span>
+                                                    )
+                                                })}
+                                            </TableRow>
+                                        </TableBody>
+                                        :
+                                        <div style={{ margin: '10px' }}>
+                                            <Typography variant="h6" component="h2">
+                                                No post found.
+                                            </Typography>
+                                        </div>
+                                    }
 
+                                </Table>
+                            </TableContainer>
+                        </Paper>
+                    </Grid>
+                </Grid>
 
-
-            <PostForm
-                callBack={x => {
-
-
-                    console.log('user name', x)
-                   
-                    setPosts(x)
-                }}
-            />
-            <br />
-
-            {
-                !posts.length == 0 ?
-                    <List>
-                        {posts.map((item, i) => {
-                            return (
-                                <span key={i} >
-                                    <ListItem >
-                                        <ListItemText variant="h6">
-                                            {i + 1}{") "}{item.title}
-                                        </ListItemText>
-                                    </ListItem>
-                                </span>
-                            )
-                        })}
-                        {/* {values.name ?
-
-                        <>
-                            <ListItem>
-                                <ListItemText primary={val.name} />
-                            </ListItem>
-                        </>
-
-                        :
-                        " could not read it"
-                    } */}
-                    </List>
-                    :
-                    "nothing found"
-            }
-
-
-
+            </div>
 
         </>
     );

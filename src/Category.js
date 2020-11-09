@@ -59,7 +59,7 @@ const AddNewCategory = ({ callBack }) => {
                     <TextField
 
                         id="newTitle"
-                        label="Title"
+                        label="New Category"
                         variant="outlined"
                         placeholder="E.g: Uniliever"
                         value={userName}
