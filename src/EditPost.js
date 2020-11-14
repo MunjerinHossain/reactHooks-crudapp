@@ -5,22 +5,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Category from './Category'
-import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import IconButton from '@material-ui/core/IconButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import EditIcon from '@material-ui/icons/Edit';
 
 
@@ -43,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     Button: {
         display: "inline",
         marginLeft: '800px',
+        paddingRight:'50px'
     }
 }));
 
@@ -66,20 +57,20 @@ const EditPost = ({ callBack, i }) => {
 
     useEffect(() => {
 
-        let readCategory = localStorage.getItem('categories')
-        console.log('read category', readCategory);
-        const value = JSON.parse(readCategory) || [];
-        console.log('load category', value);
-        setAllCategories(value)
+            let readCategory = localStorage.getItem('categories');
+            console.log('read category', readCategory);
+            const value = JSON.parse(readCategory) || [];
+            console.log('load category', value);
+            setAllCategories(value);
 
-        let readData = localStorage.getItem('posts')
-        console.log('read post', readData);
-        const data = JSON.parse(readData) || [];
-        console.log('load post', data);
-        setTitle(data[i].title)
-        setCategories(data[i].categories)
+            let readData = localStorage.getItem('posts');
+            console.log('read post', readData);
+            const data = JSON.parse(readData) || [];
+            console.log('load post', data);
+            setTitle(data[i].title);
+            setCategories(data[i].categories);
 
-    }, [])
+        }, [])
 
     const handleSubmit = () => {
 
