@@ -11,6 +11,7 @@ function App() {
       <div className="App">
 
         <Route path="/" component={Home} />
+        <Route path="/profile" component={AllPost} />
        
        
       </div>
