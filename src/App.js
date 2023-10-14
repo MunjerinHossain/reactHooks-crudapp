@@ -1,21 +1,27 @@
 // import logo from './logo.svg';
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import AllPost from './AllPost.js'
-import Home from "./Home.js"
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import AllPost from "./AllPost.js";
+import Home from "./Home.js";
+import Dashboard from "./Dashboard";
+import Menu from "./Menu";
+import AllTasks from "./Tasks/AllTasks"
+import AllProject from "./Project/AllProject"
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-
-        <Route path="/" component={Home} />
-        <Route path="/profile" component={AllPost} />
-       
-       
-      </div>
-    </Router>
+    <div className="App">
+      <Router>
+        <Menu/>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route path="/allTasks" component={AllTasks} />
+          <Route path="/allProject" component={AllProject} />
+        </Switch>
+      </Router>
+    </div>
   );
 }
 

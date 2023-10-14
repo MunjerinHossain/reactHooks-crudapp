@@ -12,6 +12,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import HomeImg from './assests/home.jpg'
 import AllPost from './AllPost';
 
+import {Link} from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,21 +48,6 @@ export default function ButtonAppBar() {
   return (
     <>
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            ITSMS IT Smart System
-          </Typography>
-          <Button color="inherit">Product</Button>
-          <Button color="inherit">Customer</Button>
-          <Button color="inherit">FAQ</Button>
-          <Button color="inherit">Pricing</Button>
-          <Button color="inherit">About Us</Button>
-        </Toolbar>
-      </AppBar>
      
       <Card style={{height: '800px', width:'750px'}}>
       <div className={classes.details}>
@@ -76,7 +62,15 @@ export default function ButtonAppBar() {
           Manage Your Work
           </Typography>
           <Button variant="contained" color="primary" style={{margin:5}}>Sign Up</Button>
-          <Button variant="contained" color="primary" >Login</Button>
+
+           <Typography className={classes.root}>
+    
+     
+    </Typography>
+    <Link to="/dashboard">
+    <Button variant="contained" color="primary">Login</Button>
+    </Link>
+         
           {/* <CardMedia className={classes.cover} image={HomeImg} title="TMS Home"/> */}
         </CardContent>  
 
