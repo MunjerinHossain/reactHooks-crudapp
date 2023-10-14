@@ -6,6 +6,8 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import TextField from '@material-ui/core/TextField';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -28,8 +30,14 @@ const useStyles = makeStyles((theme) => ({
 export default function CSSGrid() {
   const classes = useStyles();
 
+  const [value, setValue] = React.useState('');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
   return (
-    <div>
+    <div style={{margin:15}}>
       <Grid container spacing={3}>
         <Grid item xs={4}>
           <Paper className={classes.paper}>
@@ -43,7 +51,7 @@ export default function CSSGrid() {
           <MenuItem>Logout</MenuItem>
         </MenuList></Paper>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <Paper className={classes.paper}> 
           <Typography
                   variant="h6"
@@ -53,6 +61,46 @@ export default function CSSGrid() {
                   Projects
                 </Typography>
                 <Divider margin={5} />
+
+                <div style={{margin:15}}>
+                <form className={classes.root} noValidate autoComplete="off">
+      <div style={{marginTop:15}}>
+      <TextField
+          id="outlined-textarea"
+          label="* Name"
+          //placeholder="Placeholder"
+          multiline
+          variant="outlined"
+          style={{marginRight:20}}
+        />
+<TextField
+          id="outlined-textarea"
+          label="* Key"
+          placeholder="Placeholder"
+          multiline
+          variant="outlined"
+        />
+        
+
+      </div>
+
+      <div style={{marginTop:15}}>
+      <TextField
+          id="outlined-textarea"
+          label="Project URL"
+          //placeholder="Placeholder"
+          multiline
+          variant="outlined"
+          style={{marginRight:20}}
+        />
+        
+
+      </div>
+     
+     
+    </form>
+             
+                </div>
 </Paper>
         </Grid>
       </Grid>
