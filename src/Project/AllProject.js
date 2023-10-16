@@ -26,6 +26,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Divider from "@material-ui/core/Divider";
+import CreateProject from "./CreateProject";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AllProject({ props }) {
   const classes = useStyles();
 
-  const [posts, setPosts] = useState([]);
+  const [projects, setProjects] = useState([]);
 
   const [editPostModal, setEditPostModal] = React.useState([]);
 
@@ -76,33 +77,33 @@ export default function AllProject({ props }) {
   }, []);
 
   const getData = () => {
-    let readData = localStorage.getItem("posts");
-    console.log("read post", readData);
+    let readData = localStorage.getItem("projects");
+    console.log("read projects", readData);
     const data = JSON.parse(readData) || [];
-    console.log("load post", data);
-    setPosts(data);
+    console.log("load projects", data);
+    setProjects(data);
 
     setEditPostModal(new Array(data.length).fill(false));
   };
 
   const handleDelete = (i) => {
     console.log(i, "i");
-    var data = posts;
+    var data = projects;
     console.log("data l", data.length);
     data.splice(i, 1);
     console.log("data l", data.length);
     console.log("delete post", data);
 
-    localStorage.setItem("posts", JSON.stringify(posts));
-    console.log(posts, "deleteposts");
-    setPosts([...posts]);
-    console.log("state post", posts);
+    localStorage.setItem("projects", JSON.stringify(projects));
+    console.log(projects, "deleteprojects");
+    setProjects([...projects]);
+    console.log("state post", projects);
   };
 
   const handleEditPost = (p) => {
     console.log(p, "p");
-    setPosts([...p]);
-    console.log("edit post", p);
+    setProjects([...p]);
+    console.log("edit projects", p);
   };
 
   return (
@@ -112,12 +113,12 @@ export default function AllProject({ props }) {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <br />
-            {/* <PostForm
-                                callBack={cb => {
-                                    console.log('user name', cb)
-                                    setPosts(cb)
-                                }}
-                            /> */}
+            {/* <CreateProject
+              callBack={(cb) => {
+                console.log("user name", cb);
+                setProjects(cb);
+              }}
+            /> */}
             <br />
             <Grid
               item
@@ -143,21 +144,21 @@ export default function AllProject({ props }) {
                 <Divider margin={5} />
                 <TableContainer component={Paper}>
                   <Table className={classes.table} aria-label="simple table">
-                    {!posts.length == 0 ? (
+                    {!projects.length == 0 ? (
                       <TableBody>
                         <TableRow>
-                          {posts.map((item, i) => {
+                          {projects.map((item, i) => {
                             return (
                               <span key={i}>
                                 <ListItem>
                                   <ListItemText variant="h3">
                                     {i + 1}
                                     {") "}
-                                    {"Title: "}
-                                    {item.title}
+                                    {"Name: "}
+                                    {item.name}
                                     {"  "} <br />
                                     {i + 1}
-                                    {") "} {"Category:"} {item.categories}
+                                    {") "} {"Key:"} {item.key}
                                     {/* <EditPost
                                                                         callBack={handleEditPost}
                                                                         i={i}

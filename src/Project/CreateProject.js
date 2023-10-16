@@ -13,6 +13,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
+import {Redirect} from 'react-router-dom'
+import {Link} from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateProject({ callBack }) {
   const classes = useStyles();
 
-  const [value, setValue] = React.useState("");
+  const [redirect, setRedirect] = React.useState(false);
   const [name, setName] = React.useState("");
   const [key, setKey] = React.useState("");
   const [projUrl, setProjUrl] = React.useState("");
@@ -74,7 +76,14 @@ export default function CreateProject({ callBack }) {
     localStorage.setItem("projects", JSON.stringify(value));
     console.log("save projects", value);
     callBack(value);
+    setRedirect(true)
+    console.log('length', value.length);
   };
+
+    if(redirect){
+      return(<Redirect to='/allProject'/>)
+    }
+  
 
   return (
     <div style={{ margin: 15 }}>
@@ -204,9 +213,12 @@ export default function CreateProject({ callBack }) {
                 </div>
               </form>
               <Button color="primary">Cancel</Button>
+              <Link to="/allProject">
               <Button color="primary" autoFocus onClick={handleCreateProj}>
                 Create
               </Button>
+              </Link>
+             
             </div>
           </Paper>
         </Grid>
