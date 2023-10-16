@@ -70,12 +70,14 @@ export default function CenteredGrid() {
                   >
                     My Profile
                   </Button>
+                  <Link to='/allTasks'>
                   <Button
                     variant="contained"
                     style={{ borderRadius: 40, marginTop: 15, left: 34 }}
                   >
                     My Task
                   </Button>
+                  </Link>
                   <Link to="/allProject">
                     <Button
                       variant="contained"
