@@ -27,6 +27,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Divider from "@material-ui/core/Divider";
 import CreateProject from "./CreateProject";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+  import { faHouse } from '@fortawesome/free-solid-svg-icons'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -127,13 +129,21 @@ export default function AllProject({ props }) {
               style={{ marginLeft: 80, marginRight: 80 }}
             >
               <Paper className={classes.paper}>
+              <div style={{marginRight:15, display:'flex',  flexGrow: 1}}>
+                
                 <Typography
                   variant="h6"
-                  component="h2"
-                  style={{ margin: 15, alignItems: "flex-start" }}
+                  component="h4"
+                  style={{ margin: 15, alignItems: "flex-start", marginLeft:50, color:'black' }}
                 >
                   Projects
                 </Typography>
+                <Link to='/dashboard'>
+                <FontAwesomeIcon icon={faHouse} style={{color:'green', marginTop:22,  alignContent:'center'}}/>
+                </Link>
+             
+                </div>
+
                 <Divider margin={5} />
                 <Link to="/createProject">
                   <Button variant="contained" color="primary">
