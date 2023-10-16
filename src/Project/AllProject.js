@@ -187,7 +187,7 @@ export default function AllProject({ props }) {
                     ) : (
                       <div style={{ margin: "10px" }}>
                         <Typography variant="h6" component="h2">
-                          No post found.
+                          No Project found.
                         </Typography>
                       </div>
                     )}
