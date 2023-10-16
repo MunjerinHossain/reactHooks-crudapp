@@ -13,8 +13,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
-import {Redirect} from 'react-router-dom'
-import {Link} from "react-router-dom"
+import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -23,11 +23,35 @@ const useStyles = makeStyles((theme) => ({
     gridGap: theme.spacing(3),
   },
   paper: {
-    padding: theme.spacing(3),
+    // padding: theme.spacing(3),
+    // textAlign: "center",
+    // color: theme.palette.text.secondary,
+    // whiteSpace: "nowrap",
+    // marginBottom: theme.spacing(1),
+    // height:650,
+    // width:200,
+    // borderRadius: 40,left:40 ,  },
+  },
+  paperMenu: {
     textAlign: "center",
     color: theme.palette.text.secondary,
     whiteSpace: "nowrap",
-    marginBottom: theme.spacing(1),
+    height: 650,
+    width: 250,
+    borderRadius: 40,
+    marginLeft: 20,
+    marginTop: 20,
+  },
+  paperProject: {
+    //padding: theme.spacing(3),
+    //textAlign: "center",
+    color: theme.palette.text.secondary,
+    // whiteSpace: "nowrap",
+    //marginBottom: theme.spacing(1),
+    height: 650,
+    width: 1000,
+    marginLeft: -90,
+    borderRadius: 40,
   },
   divider: {
     margin: theme.spacing(2, 0),
@@ -38,6 +62,16 @@ const useStyles = makeStyles((theme) => ({
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
+  },
+  avatar: {
+    color: "black",
+    backgroundColor: "yellow",
+    borderColor: "black",
+    textAlign: "center",
+    alignItems: "center",
+    padding: 8,
+    left: 90,
+    top: 20,
   },
 }));
 
@@ -76,33 +110,99 @@ export default function CreateProject({ callBack }) {
     localStorage.setItem("projects", JSON.stringify(value));
     console.log("save projects", value);
     callBack(value);
-    setRedirect(true)
-    console.log('length', value.length);
+    setRedirect(true);
+    console.log("length", value.length);
   };
 
-    if(redirect){
-      return(<Redirect to='/allProject'/>)
-    }
-  
+  if (redirect) {
+    return <Redirect to="/allProject" />;
+  }
 
   return (
     <div style={{ margin: 15 }}>
       <Grid container spacing={3}>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>
-            <MenuList>
-              <MenuItem>My Profile</MenuItem>
-              <MenuItem>My Task</MenuItem>
-              <MenuItem>My Project</MenuItem>
-              <MenuItem>Meeting</MenuItem>
-              <MenuItem>Timeline</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Logout</MenuItem>
+        <Grid
+          item
+          xs={4}
+          style={{
+            width: 200,
+            alignContent: "space-around",
+            alignItems: "center",
+          }}
+        >
+          <Paper className={classes.paperMenu}>
+            <Avatar className={classes.avatar}>MH</Avatar>
+            <MenuList style={{ top: 20 }}>
+              <div style={{ display: "grid", width: "auto", height:'auto', top:20 }}>
+                <MenuItem>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: 40, left: 40 }}
+                  >
+                    My Profile
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: 40, left: 40 }}
+                  >
+                    My Task
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Link to="/allProject">
+                    <Button
+                      variant="contained"
+                      style={{ borderRadius: 40, left: 40 }}
+                    >
+                      My Project
+                    </Button>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: 40, left: 40 }}
+                  >
+                    Meeting
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: 40, left: 40 }}
+                  >
+                    Timeline
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: 40, left: 40 }}
+                  >
+                    Settings
+                  </Button>
+                </MenuItem>
+        
+                  <Button
+                    variant="contained"
+                    style={{
+                      borderRadius: 40,
+                      left: 60,
+                      top: 20,
+                      width:90
+                    }}
+                  >
+                    Logout
+                  </Button>
+            
+              </div>
             </MenuList>
           </Paper>
         </Grid>
         <Grid item xs={7}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paperProject}>
             <Typography
               variant="h6"
               component="h1"
@@ -214,11 +314,10 @@ export default function CreateProject({ callBack }) {
               </form>
               <Button color="primary">Cancel</Button>
               <Link to="/allProject">
-              <Button color="primary" autoFocus onClick={handleCreateProj}>
-                Create
-              </Button>
+                <Button color="primary" autoFocus onClick={handleCreateProj}>
+                  Create
+                </Button>
               </Link>
-             
             </div>
           </Paper>
         </Grid>
