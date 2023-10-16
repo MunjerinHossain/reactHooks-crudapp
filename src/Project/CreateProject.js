@@ -12,7 +12,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -39,11 +39,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CSSGrid() {
+export default function CreateProject({ callBack }) {
   const classes = useStyles();
 
   const [value, setValue] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [key, setKey] = React.useState("");
+  const [projUrl, setProjUrl] = React.useState("");
   const [projectCat, setProjectCat] = React.useState("");
+  const [desc, setDesc] = React.useState("");
   const [projectLead, setProjectLead] = React.useState("");
 
   const handleProjCat = (event) => {
@@ -54,8 +58,22 @@ export default function CSSGrid() {
     setProjectLead(event.target.value);
   };
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  const handleCreateProj = (event) => {
+    let readProjects = localStorage.getItem("projects");
+    console.log("read projects", readProjects);
+    let value = JSON.parse(readProjects) || [];
+    console.log("load projects", value);
+    value.push({
+      name: name,
+      key: key,
+      projUrl: projUrl,
+      projectCat: projectCat,
+      desc: desc,
+      projectLead: projectLead,
+    });
+    localStorage.setItem("projects", JSON.stringify(value));
+    console.log("save projects", value);
+    callBack(value);
   };
 
   return (
@@ -95,6 +113,7 @@ export default function CSSGrid() {
                     multiline
                     variant="outlined"
                     style={{ marginRight: 20 }}
+                    onChange={(e) => setName(e.target.value)}
                   />
                   <TextField
                     id="outlined-textarea"
@@ -102,6 +121,7 @@ export default function CSSGrid() {
                     placeholder="Placeholder"
                     multiline
                     variant="outlined"
+                    onChange={(e) => setKey(e.target.value)}
                   />
 
                   <div style={{ marginTop: 15 }}>
@@ -112,6 +132,7 @@ export default function CSSGrid() {
                       multiline
                       variant="outlined"
                       style={{ marginRight: 20 }}
+                      onChange={(e) => setProjUrl(e.target.value)}
                     />
 
                     {/* <Typography
@@ -150,9 +171,10 @@ export default function CSSGrid() {
                       multiline
                       variant="outlined"
                       style={{ marginRight: 20 }}
+                      onChange={(e) => setDesc(e.target.value)}
                     />
 
-<FormControl className={classes.formControl}>
+                    <FormControl className={classes.formControl}>
                       <InputLabel
                         shrink
                         id="demo-simple-select-placeholder-label-label"
@@ -181,12 +203,10 @@ export default function CSSGrid() {
                   </div>
                 </div>
               </form>
-              <Button color="primary">
-                        Cancel
-          </Button>
-                    <Button color="primary" autoFocus>
-                        Save
-          </Button>
+              <Button color="primary">Cancel</Button>
+              <Button color="primary" autoFocus onClick={handleCreateProj}>
+                Create
+              </Button>
             </div>
           </Paper>
         </Grid>
