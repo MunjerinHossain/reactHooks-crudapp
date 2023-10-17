@@ -56,6 +56,26 @@ const useStyles = makeStyles((theme) => ({
     // bottom: theme.spacing(20),
     right: theme.spacing(14),
   },
+  date: {
+    // display: "flex",
+    // flexWrap: "wrap",
+
+    position: "absolute",
+    right: theme.spacing(14),
+  },
+  startDate: {
+    // marginLeft: theme.spacing(1),
+    // marginRight: theme.spacing(1),
+    width: 200,
+    top: 300,
+    left: 382,
+  },
+  endDate: {
+    // marginRight: theme.spacing(1),
+    width: 200,
+    top: 300,
+    left: 650,
+  },
 }));
 
 export default function CreateTask() {
@@ -119,7 +139,7 @@ export default function CreateTask() {
           >
             Required field are marked with an *
           </Typography>
-          <div style={{ position: "absolute", marginLeft: 50, marginTop: -90}}>
+          <div style={{ position: "absolute", marginLeft: 50, marginTop: -90 }}>
             <FormControl className={classes.formControl}>
               <InputLabel
                 shrink
@@ -143,7 +163,10 @@ export default function CreateTask() {
                 <MenuItem value={20}>Project 2</MenuItem>
               </Select>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl
+              className={classes.formControl}
+              style={{ marginLeft: 90 }}
+            >
               <InputLabel
                 shrink
                 id="demo-simple-select-placeholder-label-label"
@@ -166,7 +189,10 @@ export default function CreateTask() {
                 <MenuItem value={20}>Epic</MenuItem>
               </Select>
             </FormControl>
-            <FormControl className={classes.formControl}>
+            <FormControl
+              className={classes.formControl}
+              style={{ alignContent: "center", marginLeft: 90 }}
+            >
               <InputLabel
                 shrink
                 id="demo-simple-select-placeholder-label-label"
@@ -189,6 +215,133 @@ export default function CreateTask() {
                 <MenuItem value={20}>Story 2</MenuItem>
               </Select>
             </FormControl>
+          </div>
+
+          <div style={{ position: "absolute", marginLeft: 50, marginTop: 20 }}>
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                shrink
+                id="demo-simple-select-placeholder-label-label"
+              >
+                Status
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-placeholder-label-label"
+                id="demo-simple-select-placeholder-label"
+                value={projectCat}
+                onChange={handleProjCat}
+                displayEmpty
+                className={classes.selectEmpty}
+                variant="outlined"
+              >
+                <MenuItem value="">
+                  <em>Status</em>
+                </MenuItem>
+                <MenuItem value={10}>Open</MenuItem>
+                <MenuItem value={20}>In Progress</MenuItem>
+                <MenuItem value={20}>Close</MenuItem>
+              </Select>
+            </FormControl>
+
+            <TextField
+              id="outlined-textarea"
+              label="Assignee *"
+              //placeholder="Placeholder"
+              multiline
+              variant="outlined"
+              style={{ alignContent: "center", marginLeft: 90, top: 130 }}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
+          <div style={{ position: "absolute", marginLeft: 50, marginTop: 20 }}>
+            <TextField
+              id="outlined-textarea"
+              label="Summary"
+              //placeholder="Placeholder"
+              multiline
+              variant="outlined"
+              style={{
+                alignContent: "center",
+                marginLeft: 10,
+                top: 230,
+                width: 435,
+              }}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <TextField
+              id="outlined-textarea"
+              label="Estimated Days"
+              //placeholder="Placeholder"
+              multiline
+              variant="outlined"
+              style={{ alignContent: "center", marginLeft: 60, top: 230 }}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
+          <div style={{ position: "absolute", marginLeft: 50 }}>
+            <TextField
+              id="outlined-textarea"
+              label="Description"
+              //placeholder="Placeholder"
+              multiline
+              variant="outlined"
+              style={{
+                alignContent: "center",
+                marginLeft: 10,
+                top: 350,
+                width: 435,
+                height: "auto",
+              }}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <form className={classes.date} noValidate>
+              <TextField
+                id="date"
+                label="Start Date"
+                type="date"
+                defaultValue="2023-10-17"
+                className={classes.startDate}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </form>
+
+            <form className={classes.date} noValidate>
+              <TextField
+                id="date"
+                label="End Date"
+                type="date"
+                defaultValue="2024-10-17"
+                className={classes.endDate}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </form>
+          </div>
+
+          <div style={{ marginLeft: 50, marginTop:480 }}>
+            <Button
+              variant="outlined"
+              style={{ backgroundColor: "#C5C6D0", color: "black",width:90, fontSize:13  }}
+            >
+              Cancel
+            </Button>
+
+            <Link to="/allTasks">
+              <Button
+                variant="outlined"
+                style={{ backgroundColor: "#9dee94", color: "black", left:30, width:90, fontSize:13 }}
+                autoFocus
+              >
+                Create
+              </Button>
+            </Link>
           </div>
         </Paper>
       </div>
