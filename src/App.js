@@ -9,6 +9,7 @@ import Menu from "./Menu";
 import AllTasks from "./Tasks/AllTasks"
 import AllProject from "./Project/AllProject"
 import CreateProject from "./Project/CreateProject";
+import CreateTask from './Tasks/CreateTask'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/allTasks" component={AllTasks} />
           <Route path="/allProject" component={AllProject} />
           <Route path="/createProject" component={CreateProject} />
+          <Route path="/createTask" component={CreateTask} />
         </Switch>
       </Router>
     </div>

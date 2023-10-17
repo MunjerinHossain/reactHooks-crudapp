@@ -167,7 +167,7 @@ export default function AllTasks({ props }) {
           
                 <TableContainer component={Paper}>
                   <Table className={classes.table} aria-label="simple table">
-                  <Link to="/createProject">
+                  <Link to="/createTask">
                   <Tooltip title="Add" aria-label="add">
                     <Fab color="secondary" className={classes.absolute}>
                       <AddIcon />
