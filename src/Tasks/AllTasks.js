@@ -26,8 +26,11 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Divider from "@material-ui/core/Divider";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-  import { faHouse } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import AddIcon from "@material-ui/icons/Add";
+import Fab from "@material-ui/core/Fab";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,10 +58,24 @@ const useStyles = makeStyles((theme) => ({
     alignContent: "center",
     left: "300px",
     height: 650,
+   
   },
   table: {
     minWidth: 650,
   },
+  fab: {
+    margin: theme.spacing(2),
+  },
+  absolute: {
+    position: "absolute",
+    bottom: theme.spacing(20),
+    right: theme.spacing(14),
+  },
+  home:{
+    position: "absolute",
+    // bottom: theme.spacing(20),
+    right: theme.spacing(14),
+  }
 }));
 
 export default function AllTasks({ props }) {
@@ -120,31 +137,44 @@ export default function AllTasks({ props }) {
               style={{ marginLeft: 80, marginRight: 80 }}
             >
               <Paper className={classes.paper}>
-              <div style={{marginRight:15, display:'flex',  flexGrow: 1}}>
-                
-                <Typography
-                  variant="h6"
-                  component="h4"
-                  style={{ margin: 15, alignItems: "flex-start", marginLeft:50, color:'black' }}
-                >
-                  Tasks
-                </Typography>
-                <Link to='/dashboard'>
-                <FontAwesomeIcon icon={faHouse} style={{color:'green', marginTop:22,  alignContent:'center'}}/>
-                </Link>
-             
+                <div style={{ marginRight: 15, display: "flex", flexGrow: 1 }}>
+                  <Typography
+                    variant="h6"
+                    component="h4"
+                    style={{
+                      margin: 15,
+                      alignItems: "flex-start",
+                      marginLeft: 50,
+                      color: "black",
+                    }}
+                  >
+                    Tasks
+                  </Typography>
+                  <Link to="/dashboard">
+                    <FontAwesomeIcon
+                      icon={faHouse}
+                      style={{
+                        color: "green",
+                        marginTop: 22,
+                        alignContent: "center",
+                      }}
+                      className={classes.home}
+                    />
+                  </Link>
                 </div>
 
                 <Divider margin={5} />
-                <Link to="/createProject">
-                  <Button variant="contained" color="primary">
-                    Create Project
-                  </Button>
-                </Link>
-
-                <Divider margin={5} />
+          
                 <TableContainer component={Paper}>
                   <Table className={classes.table} aria-label="simple table">
+                  <Link to="/createProject">
+                  <Tooltip title="Add" aria-label="add">
+                    <Fab color="secondary" className={classes.absolute}>
+                      <AddIcon />
+                    </Fab>
+                  </Tooltip>
+                </Link>
+                
                     {!projects.length == 0 ? (
                       <TableBody>
                         <TableRow>
