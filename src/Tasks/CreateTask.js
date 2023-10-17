@@ -25,8 +25,9 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: "150px",
-    top: "100px",
+    minWidth: "250px",
+    //top: "100px",
+    //backgroundColor:'yellow'
   },
   selectEmpty: {
     marginTop: theme.spacing(3),
@@ -78,24 +79,71 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CreateTask() {
+export default function CreateTask({ callBack }) {
   const classes = useStyles();
 
   const [redirect, setRedirect] = React.useState(false);
-  const [name, setName] = React.useState("");
-  const [key, setKey] = React.useState("");
-  const [projUrl, setProjUrl] = React.useState("");
-  const [projectCat, setProjectCat] = React.useState("");
+  const [project, setProject] = React.useState("");
+  const [issue, setIssue] = React.useState("");
+  const [epic, setEpic] = React.useState("");
+  const [status, setStatus] = React.useState("");
+  const [summary, setSummary] = React.useState("");
+  const [estimateDay, setEstimateDay] = React.useState("");
+  const [assignee, setAssignee] = React.useState("");
   const [desc, setDesc] = React.useState("");
-  const [projectLead, setProjectLead] = React.useState("");
+  const [startDate, setStartDate] = React.useState("");
+  const [endDate, setEnddate] = React.useState("");
+  const [projectCat, setProjectCat] = React.useState("");
 
   const handleProjCat = (event) => {
     setProjectCat(event.target.value);
   };
 
-  const handleProjLead = (event) => {
-    setProjectLead(event.target.value);
+  const handleProject = (event) => {
+    console.log('event proj', event);
+    setProject(event.target.value);
   };
+
+  const handleIssue = (event) => {
+    setIssue(event.target.value);
+  };
+
+  const handleEpic = (event) => {
+    setEpic(event.target.value);
+  };
+
+  const handleStatus = (event) => {
+    setStatus(event.target.value);
+  };
+
+  const handleCreateTask = (event) => {
+    let readTasks = localStorage.getItem("tasks");
+    console.log("read tasks", readTasks);
+    let value = JSON.parse(readTasks) || [];
+    console.log("load tasks", value);
+    value.push({
+      project: project,
+      issue: issue,
+      epic: epic,
+      status: status,
+      summary: summary,
+      assignee: assignee,
+      estimateDay: estimateDay,
+      desc: desc,
+      startDate: startDate,
+      endDate: endDate,
+    });
+    localStorage.setItem("tasks", JSON.stringify(value));
+    console.log("save tasks", value);
+    callBack(value);
+    setRedirect(true);
+    console.log("length", value.length);
+  };
+
+  if (redirect) {
+    return <Redirect to="/allTasks" />;
+  }
+
   return (
     <>
       <div style={{ margin: 50 }}>
@@ -139,7 +187,7 @@ export default function CreateTask() {
           >
             Required field are marked with an *
           </Typography>
-          <div style={{ position: "absolute", marginLeft: 50, marginTop: -90 }}>
+          <div style={{ position: "absolute", marginLeft: 50, marginTop: 20 }}>
             <FormControl className={classes.formControl}>
               <InputLabel
                 shrink
@@ -150,8 +198,8 @@ export default function CreateTask() {
               <Select
                 labelId="demo-simple-select-placeholder-label-label"
                 id="demo-simple-select-placeholder-label"
-                value={projectCat}
-                onChange={handleProjCat}
+                value={project}
+                onChange={handleProject}
                 displayEmpty
                 className={classes.selectEmpty}
                 variant="outlined"
@@ -176,8 +224,8 @@ export default function CreateTask() {
               <Select
                 labelId="demo-simple-select-placeholder-label-label"
                 id="demo-simple-select-placeholder-label"
-                value={projectCat}
-                onChange={handleProjCat}
+                value={issue}
+                onChange={handleIssue}
                 displayEmpty
                 className={classes.selectEmpty}
                 variant="outlined"
@@ -202,8 +250,8 @@ export default function CreateTask() {
               <Select
                 labelId="demo-simple-select-placeholder-label-label"
                 id="demo-simple-select-placeholder-label"
-                value={projectCat}
-                onChange={handleProjCat}
+                value={epic}
+                onChange={handleEpic}
                 displayEmpty
                 className={classes.selectEmpty}
                 variant="outlined"
@@ -217,8 +265,8 @@ export default function CreateTask() {
             </FormControl>
           </div>
 
-          <div style={{ position: "absolute", marginLeft: 50, marginTop: 20 }}>
-            <FormControl className={classes.formControl}>
+          <div style={{ position: "absolute", marginLeft: 50, marginTop: 120 }}>
+            <FormControl className={classes.formControl} >
               <InputLabel
                 shrink
                 id="demo-simple-select-placeholder-label-label"
@@ -228,8 +276,8 @@ export default function CreateTask() {
               <Select
                 labelId="demo-simple-select-placeholder-label-label"
                 id="demo-simple-select-placeholder-label"
-                value={projectCat}
-                onChange={handleProjCat}
+                value={status}
+                onChange={handleStatus}
                 displayEmpty
                 className={classes.selectEmpty}
                 variant="outlined"
@@ -239,7 +287,7 @@ export default function CreateTask() {
                 </MenuItem>
                 <MenuItem value={10}>Open</MenuItem>
                 <MenuItem value={20}>In Progress</MenuItem>
-                <MenuItem value={20}>Close</MenuItem>
+                <MenuItem value={30}>Close</MenuItem>
               </Select>
             </FormControl>
 
@@ -249,8 +297,8 @@ export default function CreateTask() {
               //placeholder="Placeholder"
               multiline
               variant="outlined"
-              style={{ alignContent: "center", marginLeft: 90, top: 130 }}
-              onChange={(e) => setName(e.target.value)}
+              style={{ alignContent: "center", marginLeft: 90, top: 35 }}
+              onChange={(e) => setAssignee(e.target.value)}
             />
           </div>
 
@@ -267,7 +315,7 @@ export default function CreateTask() {
                 top: 230,
                 width: 435,
               }}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setSummary(e.target.value)}
             />
 
             <TextField
@@ -277,7 +325,7 @@ export default function CreateTask() {
               multiline
               variant="outlined"
               style={{ alignContent: "center", marginLeft: 60, top: 230 }}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setEstimateDay(e.target.value)}
             />
           </div>
 
@@ -295,7 +343,7 @@ export default function CreateTask() {
                 width: 435,
                 height: "auto",
               }}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setDesc(e.target.value)}
             />
 
             <form className={classes.date} noValidate>
@@ -308,6 +356,7 @@ export default function CreateTask() {
                 InputLabelProps={{
                   shrink: true,
                 }}
+                onChange={(e) => setStartDate(e.target.value)}
               />
             </form>
 
@@ -321,14 +370,20 @@ export default function CreateTask() {
                 InputLabelProps={{
                   shrink: true,
                 }}
+                onChange={(e) => setEnddate(e.target.value)}
               />
             </form>
           </div>
 
-          <div style={{ marginLeft: 50, marginTop:480 }}>
+          <div style={{ marginLeft: 50, marginTop: 480 }}>
             <Button
               variant="outlined"
-              style={{ backgroundColor: "#C5C6D0", color: "black",width:90, fontSize:13  }}
+              style={{
+                backgroundColor: "#C5C6D0",
+                color: "black",
+                width: 90,
+                fontSize: 13,
+              }}
             >
               Cancel
             </Button>
@@ -336,8 +391,15 @@ export default function CreateTask() {
             <Link to="/allTasks">
               <Button
                 variant="outlined"
-                style={{ backgroundColor: "#9dee94", color: "black", left:30, width:90, fontSize:13 }}
+                style={{
+                  backgroundColor: "#9dee94",
+                  color: "black",
+                  left: 30,
+                  width: 90,
+                  fontSize: 13,
+                }}
                 autoFocus
+                onClick={handleCreateTask}
               >
                 Create
               </Button>

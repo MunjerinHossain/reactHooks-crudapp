@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AllTasks({ props }) {
   const classes = useStyles();
 
-  const [projects, setProjects] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   const [editPostModal, setEditPostModal] = React.useState([]);
 
@@ -95,33 +95,33 @@ export default function AllTasks({ props }) {
   }, []);
 
   const getData = () => {
-    let readData = localStorage.getItem("projects");
-    console.log("read projects", readData);
+    let readData = localStorage.getItem("tasks");
+    console.log("read tasks", readData);
     const data = JSON.parse(readData) || [];
-    console.log("load projects", data);
-    setProjects(data);
+    console.log("load tasks", data);
+    setTasks(data);
 
     setEditPostModal(new Array(data.length).fill(false));
   };
 
   const handleDelete = (i) => {
     console.log(i, "i");
-    var data = projects;
+    var data = tasks;
     console.log("data l", data.length);
     data.splice(i, 1);
     console.log("data l", data.length);
     console.log("delete post", data);
 
-    localStorage.setItem("projects", JSON.stringify(projects));
-    console.log(projects, "deleteprojects");
-    setProjects([...projects]);
-    console.log("state post", projects);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log(tasks, "deletetasks");
+    setTasks([...tasks]);
+    console.log("state post", tasks);
   };
 
   const handleEditPost = (p) => {
     console.log(p, "p");
-    setProjects([...p]);
-    console.log("edit projects", p);
+    setTasks([...p]);
+    console.log("edit tasks", p);
   };
 
   return (
@@ -175,21 +175,21 @@ export default function AllTasks({ props }) {
                   </Tooltip>
                 </Link>
                 
-                    {!projects.length == 0 ? (
+                    {!tasks.length == 0 ? (
                       <TableBody>
                         <TableRow>
-                          {projects.map((item, i) => {
+                          {tasks.map((item, i) => {
                             return (
                               <span key={i}>
                                 <ListItem>
                                   <ListItemText variant="h3">
                                     {i + 1}
                                     {") "}
-                                    {"Name: "}
-                                    {item.name}
+                                    {"Project: "}
+                                    {item.project}
                                     {"  "} <br />
                                     {i + 1}
-                                    {") "} {"Key:"} {item.key}
+                                    {") "} {"Assignee:"} {item.assignee}
                                     {/* <EditPost
                                                                         callBack={handleEditPost}
                                                                         i={i}
