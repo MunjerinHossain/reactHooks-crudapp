@@ -268,8 +268,8 @@ export default function CreateProject({ callBack }) {
                         <MenuItem value="">
                           <em>Categories</em>
                         </MenuItem>
-                        <MenuItem value={10}>Service</MenuItem>
-                        <MenuItem value={20}>Software</MenuItem>
+                        <MenuItem value={'Service'}>Service</MenuItem>
+                        <MenuItem value={'Software'}>Software</MenuItem>
                       </Select>
                     </FormControl>
 
@@ -302,11 +302,11 @@ export default function CreateProject({ callBack }) {
                         <MenuItem value="">
                           <em>Select Leaders</em>
                         </MenuItem>
-                        <MenuItem value={10}>Imran</MenuItem>
-                        <MenuItem value={20}>Munjerin</MenuItem>
-                        <MenuItem value={30}>Sora</MenuItem>
-                        <MenuItem value={40}>Shuvo</MenuItem>
-                        <MenuItem value={50}>Theodore</MenuItem>
+                        <MenuItem value={'Imran'}>Imran</MenuItem>
+                        <MenuItem value={'Munjerin'}>Munjerin</MenuItem>
+                        <MenuItem value={'Sora'}>Sora</MenuItem>
+                        <MenuItem value={'Shuvo'}>Shuvo</MenuItem>
+                        <MenuItem value={'Theodore'}>Theodore</MenuItem>
                       </Select>
                     </FormControl>
                   </div>

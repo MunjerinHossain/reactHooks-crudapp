@@ -207,8 +207,8 @@ export default function CreateTask({ callBack }) {
                 <MenuItem value="">
                   <em>Project</em>
                 </MenuItem>
-                <MenuItem value={10}>Project 1</MenuItem>
-                <MenuItem value={20}>Project 2</MenuItem>
+                <MenuItem value={'Project 1'}>Project 1</MenuItem>
+                <MenuItem value={'Project 2'}>Project 2</MenuItem>
               </Select>
             </FormControl>
             <FormControl
@@ -233,8 +233,8 @@ export default function CreateTask({ callBack }) {
                 <MenuItem value="">
                   <em>Issue Task</em>
                 </MenuItem>
-                <MenuItem value={10}>Task</MenuItem>
-                <MenuItem value={20}>Epic</MenuItem>
+                <MenuItem value={'Task'}>Task</MenuItem>
+                <MenuItem value={'Epic'}>Epic</MenuItem>
               </Select>
             </FormControl>
             <FormControl
@@ -259,8 +259,8 @@ export default function CreateTask({ callBack }) {
                 <MenuItem value="">
                   <em>Epic</em>
                 </MenuItem>
-                <MenuItem value={10}>Story 1</MenuItem>
-                <MenuItem value={20}>Story 2</MenuItem>
+                <MenuItem value={'Story 1'}>Story 1</MenuItem>
+                <MenuItem value={'Story 2'}>Story 2</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -285,9 +285,9 @@ export default function CreateTask({ callBack }) {
                 <MenuItem value="">
                   <em>Status</em>
                 </MenuItem>
-                <MenuItem value={10}>Open</MenuItem>
-                <MenuItem value={20}>In Progress</MenuItem>
-                <MenuItem value={30}>Close</MenuItem>
+                <MenuItem value={'Open'}>Open</MenuItem>
+                <MenuItem value={'In Progress'}>In Progress</MenuItem>
+                <MenuItem value={'Close'}>Close</MenuItem>
               </Select>
             </FormControl>
 
