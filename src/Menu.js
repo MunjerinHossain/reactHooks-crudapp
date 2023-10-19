@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "black",
   },
- 
 }));
 
 export default function ButtonAppBar() {
@@ -34,37 +34,32 @@ export default function ButtonAppBar() {
   const [dash, setDash] = React.useState(false);
   console.log("dash", dash);
 
-
-
-
   return (
     <>
       <div className={classes.root}>
-      
-          <>
-            <AppBar position="static">
-              <Toolbar>
-                <IconButton
-                  edge="start"
-                  className={classes.menuButton}
-                  color="inherit"
-                  aria-label="menu"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" className={classes.title}>
-                  ITSMS IT Smart System
-                </Typography>
-                <Button color="inherit">Product</Button>
-                <Button color="inherit">Customer</Button>
-                <Button color="inherit">FAQ</Button>
-                <Button color="inherit">Pricing</Button>
-                <Button color="inherit">About Us</Button>
-              </Toolbar>
-            </AppBar>
+        <>
+          <AppBar position="static" style={{ backgroundColor: "white" }}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="black"
+                aria-label="menu"
+              >
+                <MenuIcon color="black" />
+              </IconButton>
+              <Typography variant="h6" className={classes.title} style={{color:"black", fontWeight:'bold'}}>
+                ITSMS  IT Smart System
+              </Typography>
 
-          </>
-        
+              <Button color="black" style={{right:80}}>Product</Button>
+              <Button color="black" style={{right:80}}>Customer</Button>
+              <Button color="black" style={{right:80}}>FAQ</Button>
+              <Button color="black" style={{right:80}}>Pricing</Button>
+              <Button color="black" style={{right:80}}>About Us</Button>
+            </Toolbar>
+          </AppBar>
+        </>
       </div>
     </>
   );
