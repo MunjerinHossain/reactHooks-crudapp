@@ -9,7 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import HomeImg from "./assests/home.jpg";
+import NewHomeImage from "./assests/newHomeImage.png";
 import ITImg from "./assests/it-manage.png";
 import AllPost from "./AllPost";
 
@@ -86,7 +86,7 @@ export default function ButtonAppBar() {
               {/* <CardMedia className={classes.cover} image={HomeImg} title="TMS Home"/> */}
             </CardContent>
             <div style={{marginLeft:-30}}>
-            <img src={ITImg} style={{maxWidth:780, maxHeight:800, marginTop:20, borderRadius:80, marginLeft:20}}/>
+            <img src={NewHomeImage} style={{maxWidth:750, maxHeight:900, marginTop:25, borderRadius:80, marginLeft:20}}/>
             </div>
    
 
