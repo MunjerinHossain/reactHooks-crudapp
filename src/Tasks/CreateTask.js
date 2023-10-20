@@ -376,6 +376,7 @@ export default function CreateTask({ callBack }) {
           </div>
 
           <div style={{ marginLeft: 50, marginTop: 480 }}>
+            <Link to="/allTasks">
             <Button
               variant="outlined"
               style={{
@@ -387,7 +388,7 @@ export default function CreateTask({ callBack }) {
             >
               Cancel
             </Button>
-
+            </Link>
             <Link to="/allTasks">
               <Button
                 variant="outlined"

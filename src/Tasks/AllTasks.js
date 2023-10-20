@@ -58,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
     alignContent: "center",
     left: "300px",
     height: 650,
-   
   },
   table: {
     minWidth: 650,
@@ -71,11 +70,11 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(20),
     right: theme.spacing(14),
   },
-  home:{
+  home: {
     position: "absolute",
     // bottom: theme.spacing(20),
     right: theme.spacing(14),
-  }
+  },
 }));
 
 export default function AllTasks({ props }) {
@@ -164,17 +163,17 @@ export default function AllTasks({ props }) {
                 </div>
 
                 <Divider margin={5} />
-          
+
                 <TableContainer component={Paper}>
                   <Table className={classes.table} aria-label="simple table">
-                  <Link to="/createTask">
-                  <Tooltip title="Add" aria-label="add">
-                    <Fab color="secondary" className={classes.absolute}>
-                      <AddIcon />
-                    </Fab>
-                  </Tooltip>
-                </Link>
-                
+                    <Link to="/createTask">
+                      <Tooltip title="Add" aria-label="add">
+                        <Fab color="secondary" className={classes.absolute}>
+                          <AddIcon />
+                        </Fab>
+                      </Tooltip>
+                    </Link>
+
                     {!tasks.length == 0 ? (
                       <TableBody>
                         <TableRow>
@@ -182,14 +181,19 @@ export default function AllTasks({ props }) {
                             return (
                               <span key={i}>
                                 <ListItem>
-                                  <ListItemText variant="h3">
+                                  <ListItemText variant="h6" component='h2' style={{margin:10, display:'grid'}}>
                                     {i + 1}
                                     {") "}
-                                    {"Project: "}
+                                    {" Project Details: "}
+                                    {/* <br />
+                                    <br /> */}
                                     {item.project}
-                                    {"  "} <br />
-                                    {i + 1}
-                                    {") "} {"Assignee:"} {item.assignee}
+                                    {" | "}
+                                    {item.epic}
+                                    {"  "} 
+                                    <br />
+                                    <br />
+                                    {"** "} {"Assignee:"} {item.assignee}
                                     {/* <EditPost
                                                                         callBack={handleEditPost}
                                                                         i={i}
