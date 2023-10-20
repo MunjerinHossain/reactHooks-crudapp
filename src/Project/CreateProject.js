@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paperProject: {
     //padding: theme.spacing(3),
-    //textAlign: "center",
+    textAlign: "center",
     color: theme.palette.text.secondary,
     // whiteSpace: "nowrap",
     //marginBottom: theme.spacing(1),
@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     width: 1000,
     marginLeft: -90,
     borderRadius: 40,
+    alignContent: "center",
   },
   divider: {
     margin: theme.spacing(2, 0),
@@ -70,8 +71,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     alignItems: "center",
     padding: 8,
-    left: 90,
-    top: 20,
+    left: 65,
+    top: 25,
+  },
+  root: {
+    display: "grid",
+    position: "relative",
+    //flexGrow:1
   },
 }));
 
@@ -133,7 +139,14 @@ export default function CreateProject({ callBack }) {
           <Paper className={classes.paperMenu}>
             <Avatar className={classes.avatar}>MH</Avatar>
             <MenuList style={{ top: 20 }}>
-              <div style={{ display: "grid", width: "auto", height:'auto', top:20 }}>
+              <div
+                style={{
+                  display: "grid",
+                  width: "auto",
+                  height: "auto",
+                  top: 20,
+                }}
+              >
                 <MenuItem>
                   <Button
                     variant="contained"
@@ -184,19 +197,18 @@ export default function CreateProject({ callBack }) {
                     Settings
                   </Button>
                 </MenuItem>
-        
-                  <Button
-                    variant="contained"
-                    style={{
-                      borderRadius: 40,
-                      left: 60,
-                      top: 20,
-                      width:90
-                    }}
-                  >
-                    Logout
-                  </Button>
-            
+
+                <Button
+                  variant="contained"
+                  style={{
+                    borderRadius: 40,
+                    left: 60,
+                    top: 20,
+                    width: 90,
+                  }}
+                >
+                  Logout
+                </Button>
               </div>
             </MenuList>
           </Paper>
@@ -206,15 +218,15 @@ export default function CreateProject({ callBack }) {
             <Typography
               variant="h6"
               component="h1"
-              style={{ margin: 15, alignItems: "flex-start" }}
+              style={{ margin: 15,paddingTop:10 }}
             >
-              Projects
+              Create Project
             </Typography>
             <Divider margin={5} />
 
-            <div style={{ margin: 15 }}>
+            <div style={{ margin: 15, paddingLeft:300}}>
               <form className={classes.root} noValidate autoComplete="off">
-                <div style={{ marginTop: 15 }}>
+                <div style={{ marginTop: 15, position: "absolute" }}>
                   <TextField
                     id="outlined-textarea"
                     label="* Name"
@@ -232,94 +244,147 @@ export default function CreateProject({ callBack }) {
                     variant="outlined"
                     onChange={(e) => setKey(e.target.value)}
                   />
+                </div>
 
-                  <div style={{ marginTop: 15 }}>
-                    <TextField
-                      id="outlined-textarea"
-                      label="Project URL"
-                      //placeholder="Placeholder"
-                      multiline
-                      variant="outlined"
-                      style={{ marginRight: 20 }}
-                      onChange={(e) => setProjUrl(e.target.value)}
-                    />
-
-                    {/* <Typography
-                      style={{ margin: 15, alignItems: "flex-start" }}
+                <div style={{ marginTop: 90, position: "absolute" }}>
+                  <TextField
+                    id="outlined-textarea"
+                    label="Project URL"
+                    //placeholder="Placeholder"
+                    multiline
+                    variant="outlined"
+                    style={{ marginRight: 20 }}
+                    onChange={(e) => setProjUrl(e.target.value)}
+                  />
+                  <TextField
+                    id="outlined-textarea"
+                    label="Avatar"
+                    placeholder="Insert Photo"
+                    multiline
+                    variant="outlined"
+                    onChange={(e) => setKey(e.target.value)}
+                    // style={{top:40}}
+                  />
+                </div>
+                <div style={{ marginTop: 150, position: "absolute" }}>
+                  <FormControl
+                    className={classes.formControl}
+                    style={{
+                      position: "absolute",
+                      width: 190,
+                      left: -5,
+                      top: 10,
+                    }}
+                  >
+                    <InputLabel
+                      shrink
+                      id="demo-simple-select-placeholder-label-label"
                     >
-                      Avatar
-                    </Typography> */}
-                    <FormControl className={classes.formControl}>
-                      <InputLabel
-                        shrink
-                        id="demo-simple-select-placeholder-label-label"
-                      >
-                        * Project Category
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-placeholder-label-label"
-                        id="demo-simple-select-placeholder-label"
-                        value={projectCat}
-                        onChange={handleProjCat}
-                        displayEmpty
-                        className={classes.selectEmpty}
-                        variant="outlined"
-                      >
-                        <MenuItem value="">
-                          <em>Categories</em>
-                        </MenuItem>
-                        <MenuItem value={'Service'}>Service</MenuItem>
-                        <MenuItem value={'Software'}>Software</MenuItem>
-                      </Select>
-                    </FormControl>
-
-                    <TextField
-                      id="outlined-textarea"
-                      label="Description"
-                      //placeholder="Placeholder"
-                      multiline
+                      * Project Category
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-placeholder-label-label"
+                      id="demo-simple-select-placeholder-label"
+                      value={projectCat}
+                      onChange={handleProjCat}
+                      displayEmpty
+                      className={classes.selectEmpty}
                       variant="outlined"
-                      style={{ marginRight: 20 }}
-                      onChange={(e) => setDesc(e.target.value)}
-                    />
+                    >
+                      <MenuItem value="">
+                        <em>Categories</em>
+                      </MenuItem>
+                      <MenuItem value={"Service"}>Service</MenuItem>
+                      <MenuItem value={"Software"}>Software</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+                <div style={{ marginTop: 150, position: "absolute" }}>
+                  <TextField
+                    id="outlined-textarea"
+                    label="Description"
+                    //placeholder="Placeholder"
+                    multiline
+                    variant="outlined"
+                    style={{
+                      marginRight: 20,
+                      marginTop: 80,
+                      top: 40,
+                      width: 400,
+                    }}
+                    onChange={(e) => setDesc(e.target.value)}
+                  />
+                </div>
 
-                    <FormControl className={classes.formControl}>
-                      <InputLabel
-                        shrink
-                        id="demo-simple-select-placeholder-label-label"
-                      >
-                        Project Lead
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-placeholder-label-label"
-                        id="demo-simple-select-placeholder-label"
-                        value={projectLead}
-                        onChange={handleProjLead}
-                        displayEmpty
-                        className={classes.selectEmpty}
-                        variant="outlined"
-                      >
-                        <MenuItem value="">
-                          <em>Select Leaders</em>
-                        </MenuItem>
-                        <MenuItem value={'Imran'}>Imran</MenuItem>
-                        <MenuItem value={'Munjerin'}>Munjerin</MenuItem>
-                        <MenuItem value={'Sora'}>Sora</MenuItem>
-                        <MenuItem value={'Shuvo'}>Shuvo</MenuItem>
-                        <MenuItem value={'Theodore'}>Theodore</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </div>
+                <div style={{ marginTop: 350, position: "absolute" }}>
+                  <FormControl
+                    className={classes.formControl}
+                    style={{
+                      //position: "absolute",
+                      width: 190,
+                      left: -5,
+                      top: 10,
+                    }}
+                  >
+                    <InputLabel
+                      shrink
+                      id="demo-simple-select-placeholder-label-label"
+                    >
+                      Project Lead
+                    </InputLabel>
+
+                    <Select
+                      labelId="demo-simple-select-placeholder-label-label"
+                      id="demo-simple-select-placeholder-label"
+                      value={projectLead}
+                      onChange={handleProjLead}
+                      displayEmpty
+                      className={classes.selectEmpty}
+                      variant="outlined"
+                    >
+                      <MenuItem value="">
+                        <em>Select Leaders</em>
+                      </MenuItem>
+                      <MenuItem value={"Imran"}>Imran</MenuItem>
+                      <MenuItem value={"Munjerin"}>Munjerin</MenuItem>
+                      <MenuItem value={"Sora"}>Sora</MenuItem>
+                      <MenuItem value={"Shuvo"}>Shuvo</MenuItem>
+                      <MenuItem value={"Theodore"}>Theodore</MenuItem>
+                    </Select>
+                  </FormControl>
                 </div>
               </form>
-              <Button color="primary">Cancel</Button>
-              <Link to="/allProject">
-                <Button color="primary" autoFocus onClick={handleCreateProj}>
-                  Create
-                </Button>
-              </Link>
             </div>
           </Paper>
+
+          <Link to="/allProject">
+            <Button color="primary" style={{
+                backgroundColor: "#C5C6D0",
+                color: "black",
+                width: 90,
+                fontSize: 13,
+                bottom: 70
+              }}>
+              Cancel
+            </Button>
+          </Link>
+          <Link to="/allProject">
+            <Button
+              color="primary"
+              autoFocus
+              onClick={handleCreateProj}
+              style={{
+                backgroundColor: "#9dee94",
+                color: "black",
+                left: 30,
+                width: 90,
+                fontSize: 13,
+                bottom: 70,
+              }}
+            >
+              Create
+            </Button>
+          </Link>
         </Grid>
       </Grid>
       <Divider className={classes.divider} />
