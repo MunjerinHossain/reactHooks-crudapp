@@ -26,9 +26,11 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Divider from "@material-ui/core/Divider";
-import CreateProject from "./CreateProject";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-  import { faHouse } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import AddIcon from "@material-ui/icons/Add";
+import Fab from "@material-ui/core/Fab";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,9 +62,22 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
+  fab: {
+    margin: theme.spacing(2),
+  },
+  absolute: {
+    position: "absolute",
+    bottom: theme.spacing(20),
+    right: theme.spacing(14),
+  },
+  home: {
+    position: "absolute",
+    // bottom: theme.spacing(20),
+    right: theme.spacing(14),
+  },
 }));
 
-export default function AllProject({ props }) {
+export default function AllTasks({ props }) {
   const classes = useStyles();
 
   const [projects, setProjects] = useState([]);
@@ -108,20 +123,13 @@ export default function AllProject({ props }) {
     console.log("edit projects", p);
   };
 
+
   return (
     <>
       {/* <div className={classes.root}> */}
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <br />
-            {/* <CreateProject
-              callBack={(cb) => {
-                console.log("user name", cb);
-                setProjects(cb);
-              }}
-            /> */}
-            <br />
             <Grid
               item
               xs={12}
@@ -129,31 +137,44 @@ export default function AllProject({ props }) {
               style={{ marginLeft: 80, marginRight: 80 }}
             >
               <Paper className={classes.paper}>
-              <div style={{marginRight:15, display:'flex',  flexGrow: 1}}>
-                
-                <Typography
-                  variant="h6"
-                  component="h4"
-                  style={{ margin: 15, alignItems: "flex-start", marginLeft:50, color:'black' }}
-                >
-                  Projects
-                </Typography>
-                <Link to='/dashboard'>
-                <FontAwesomeIcon icon={faHouse} style={{color:'green', marginTop:22,  alignContent:'center'}}/>
-                </Link>
-             
+                <div style={{ marginRight: 15, display: "flex", flexGrow: 1 }}>
+                  <Typography
+                    variant="h6"
+                    component="h4"
+                    style={{
+                      margin: 15,
+                      alignItems: "flex-start",
+                      marginLeft: 50,
+                      color: "black",
+                    }}
+                  >
+                    Projects
+                  </Typography>
+                  <Link to="/dashboard">
+                    <FontAwesomeIcon
+                      icon={faHouse}
+                      style={{
+                        color: "green",
+                        marginTop: 22,
+                        alignContent: "center",
+                      }}
+                      className={classes.home}
+                    />
+                  </Link>
                 </div>
 
                 <Divider margin={5} />
-                <Link to="/createProject">
-                  <Button variant="contained" color="primary">
-                    Create Project
-                  </Button>
-                </Link>
 
-                <Divider margin={5} />
                 <TableContainer component={Paper}>
                   <Table className={classes.table} aria-label="simple table">
+                    <Link to="/createProject">
+                      <Tooltip title="Add" aria-label="add">
+                        <Fab color="secondary" className={classes.absolute}>
+                          <AddIcon />
+                        </Fab>
+                      </Tooltip>
+                    </Link>
+
                     {!projects.length == 0 ? (
                       <TableBody>
                         <TableRow>
@@ -161,14 +182,23 @@ export default function AllProject({ props }) {
                             return (
                               <span key={i}>
                                 <ListItem>
-                                  <ListItemText variant="h3">
+                                  <ListItemText variant="h6" component='h2' style={{margin:10, display:'grid'}}>
                                     {i + 1}
                                     {") "}
-                                    {"Name: "}
+                                    {" Name: "}
+                                    {/* <br />
+                                    <br /> */}
                                     {item.name}
-                                    {"  "} <br />
-                                    {i + 1}
-                                    {") "} {"Key:"} {item.key}
+                                    {"  "} 
+                                    <br />
+                                    <br />
+                                    {"Key:"} {item.key}
+                                    <br />
+                                    <br />
+                                    {"Category:"} {item.projectCat}
+                                    <br />
+                                    <br />
+                                    {"Leader:"} {item.projectLead}
                                     {/* <EditPost
                                                                         callBack={handleEditPost}
                                                                         i={i}

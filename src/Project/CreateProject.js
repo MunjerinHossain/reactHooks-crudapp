@@ -218,13 +218,13 @@ export default function CreateProject({ callBack }) {
             <Typography
               variant="h6"
               component="h1"
-              style={{ margin: 15,paddingTop:10 }}
+              style={{ margin: 15, paddingTop: 10 }}
             >
               Create Project
             </Typography>
             <Divider margin={5} />
 
-            <div style={{ margin: 15, paddingLeft:300}}>
+            <div style={{ margin: 15, paddingLeft: 300 }}>
               <form className={classes.root} noValidate autoComplete="off">
                 <div style={{ marginTop: 15, position: "absolute" }}>
                   <TextField
@@ -265,12 +265,95 @@ export default function CreateProject({ callBack }) {
                     onChange={(e) => setKey(e.target.value)}
                     // style={{top:40}}
                   />
-                </div>
-                <div style={{ marginTop: 150, position: "absolute" }}>
                   <FormControl
                     className={classes.formControl}
                     style={{
                       position: "absolute",
+                      width: 190,
+                      left: -5,
+                      marginTop: 80,
+                    }}
+                  >
+                    <InputLabel
+                      shrink
+                      id="demo-simple-select-placeholder-label-label"
+                    >
+                      * Project Category
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-placeholder-label-label"
+                      id="demo-simple-select-placeholder-label"
+                      value={projectCat}
+                      onChange={handleProjCat}
+                      displayEmpty
+                      className={classes.selectEmpty}
+                      variant="outlined"
+                    >
+                      <MenuItem value="">
+                        <em>Categories</em>
+                      </MenuItem>
+                      <MenuItem value={"Service"}>Service</MenuItem>
+                      <MenuItem value={"Software"}>Software</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                  <TextField
+                    id="outlined-textarea"
+                    label="Description"
+                    //placeholder="Placeholder"
+                    multiline
+                    variant="outlined"
+                    style={{
+                      left: 3,
+                      marginTop: 80,
+                      top: 90,
+                      width: 400,
+                      position: "absolute",
+                    }}
+                    onChange={(e) => setDesc(e.target.value)}
+                  />
+
+                  <FormControl
+                    className={classes.formControl}
+                    style={{
+                      position: "absolute",
+                      width: 190,
+                      left: -5,
+                      top: 250,
+                    }}
+                  >
+                    <InputLabel
+                      shrink
+                      id="demo-simple-select-placeholder-label-label"
+                    >
+                      Project Lead
+                    </InputLabel>
+
+                    <Select
+                      labelId="demo-simple-select-placeholder-label-label"
+                      id="demo-simple-select-placeholder-label"
+                      value={projectLead}
+                      onChange={handleProjLead}
+                      displayEmpty
+                      className={classes.selectEmpty}
+                      variant="outlined"
+                    >
+                      <MenuItem value="">
+                        <em>Select Leaders</em>
+                      </MenuItem>
+                      <MenuItem value={"Imran"}>Imran</MenuItem>
+                      <MenuItem value={"Munjerin"}>Munjerin</MenuItem>
+                      <MenuItem value={"Sora"}>Sora</MenuItem>
+                      <MenuItem value={"Shuvo"}>Shuvo</MenuItem>
+                      <MenuItem value={"Theodore"}>Theodore</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+                {/* <div style={{ position: "absolute", marginTop: 130 }}>
+                  <FormControl
+                    className={classes.formControl}
+                    style={{
+                      //position: "absolute",
                       width: 190,
                       left: -5,
                       top: 10,
@@ -298,8 +381,8 @@ export default function CreateProject({ callBack }) {
                       <MenuItem value={"Software"}>Software</MenuItem>
                     </Select>
                   </FormControl>
-                </div>
-                <div style={{ marginTop: 150, position: "absolute" }}>
+                </div> */}
+                {/* <div style={{ marginTop: 150, position: "absolute" }}>
                   <TextField
                     id="outlined-textarea"
                     label="Description"
@@ -314,9 +397,9 @@ export default function CreateProject({ callBack }) {
                     }}
                     onChange={(e) => setDesc(e.target.value)}
                   />
-                </div>
+                </div> */}
 
-                <div style={{ marginTop: 350, position: "absolute" }}>
+                {/* <div style={{ marginTop: 350, position: "absolute" }}>
                   <FormControl
                     className={classes.formControl}
                     style={{
@@ -352,19 +435,22 @@ export default function CreateProject({ callBack }) {
                       <MenuItem value={"Theodore"}>Theodore</MenuItem>
                     </Select>
                   </FormControl>
-                </div>
+                </div> */}
               </form>
             </div>
           </Paper>
 
           <Link to="/allProject">
-            <Button color="primary" style={{
+            <Button
+              color="primary"
+              style={{
                 backgroundColor: "#C5C6D0",
                 color: "black",
                 width: 90,
                 fontSize: 13,
-                bottom: 70
-              }}>
+                bottom: 70,
+              }}
+            >
               Cancel
             </Button>
           </Link>
